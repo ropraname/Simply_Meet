@@ -1,5 +1,5 @@
 Simply_Meet is a web application for telegram
-<h2> <a href="https://t.me/Simply_Meet_Bot"> Simply_Meet </a> is a web application for telegram <br> <br>
+<h2> <a href="https://t.me/Simply_Meet_Bot"> Simply_Meet </a> is a web application for telegram <br> <br> </h2>
 
 Here you can find new friends, a study-buddy or just a good company for a joint activity(in MISIS).
 
