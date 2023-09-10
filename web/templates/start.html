@@ -1,0 +1,8 @@
+<h1>Выбери интересы</h1>
+
+<div>
+    {% for interest in dconf['main_interests'] %}
+        <input type="checkbox" name="{{interest}}" value="1">{{interest}}<Br>
+    {% endfor %}
+    <p><button class="reloader" hx-include="closest div" hx-post="start_interest_submit" hx-swap="none">Готово</button></p>
+</div>

@@ -8,54 +8,62 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import sessionmaker
+import asyncio
 
-from secret import SQLALCHEMY_DATABASE_URL
-
-engine = sqlalchemy.create_engine(SQLALCHEMY_DATABASE_URL)
-
-Base = declarative_base()
+import sys
+sys.path.append('..')
+import secret
 
 from sqlalchemy import *
 
-metadata = MetaData()
+engine = sqlalchemy.create_engine(secret.SQLALCHEMY_DATABASE_URL)
 
-user = Table('users', metadata,
-    Column('id', BigInteger(), primary_key=True, nullable=False),
-    Column('interests', Text(), nullable=False),
-    Column('no_interest', Text(), nullable=False),
-    Column('self_describe', Text(), nullable=False),
-    Column('intention', Text(), nullable=False),
-)
+Base = declarative_base()
+
+class Users(Base):
+    __tablename__ = 'users'
+    id = Column(BigInteger, primary_key=True, nullable=False)
+    interests = Column(Text, nullable=True)
+    no_interest = Column(Text, nullable=True)
+    self_describe = Column(Text, nullable=True)
+    page = Column(Text, nullable=False)
+    intention = Column(Text, nullable=True)
+
+class Pairs_Finding(Base):
+    __tablename__ = 'pairs_finding'
+    id = Column(BigInteger, primary_key=True, nullable=False, autoincrement=True)
+    user_id = Column(BigInteger, ForeignKey("users.id"), nullable=False)
+    pair_user_id = Column(BigInteger, ForeignKey("users.id"), nullable=True)
+    whishes = Column(Text, nullable=False)
+    time = Column(Text, nullable=True)
+    place = Column(Text, nullable=True)
+    description = Column(Text, nullable=True)
+    declined_users = Column(Text, nullable=False)
+    done = Column(Boolean, nullable=False)
 
 
-pairs_finding = Table('pairs_finding', metadata,
-    Column('id', Integer(), primary_key=True, nullable=False),
-    Column('user_id', Integer(), ForeignKey("user.id"), nullable=False),
-    Column('whishes', Text(), nullable=False),
-    Column('time', Text(),  nullable=False),
-    Column('place', Text(),  nullable=False),
-    Column('description', Text(),  nullable=False),
-    Column('declined_users', Text(),  nullable=False),
-    Column('done', Boolean(), nullable=False),
-)
+class Events(Base):
+    __tablename__ = "events"
+    id = Column(BigInteger, primary_key=True, nullable=False, autoincrement=True)
+    user_id = Column(BigInteger, ForeignKey("users.id"), nullable=False)
+    general_topic = Column(Text, nullable=False)
+    topic = Column(Text, nullable=False)
+    people_amount = Column(Text, nullable=False)
+    time = Column(Text, nullable=False)
+    place = Column(Text, nullable=False)
+    accepted_users = Column(Text, nullable=False)
+    done = Column(Boolean, nullable=False)
 
-events = Table('events', metadata,
-    Column('id', Integer(), primary_key=True),
-    Column('user_id', Integer(), ForeignKey("user.id"), nullable=False),
-    Column('general_topic', Text(), nullable=False),
-    Column('topic', Text(),  nullable=False),
-    Column('people_amount', Text(),  nullable=False),
-    Column('time', Text(),  nullable=False),
-    Column('place', Text(),  nullable=False),
-    Column('accepted_users', Text(),  nullable=False),
-    Column('done', Boolean(),  nullable=False),
-)
+class Something_New(Base):
+    __tablename__ = "sth_new"
+    id = Column(BigInteger, primary_key=True, nullable=False, autoincrement=True)
+    user_id = Column(BigInteger, ForeignKey("users.id"), nullable=False)
+    pair_user_id = Column(BigInteger, ForeignKey("users.id"), nullable=False)
+    important_factor = Column(Text, nullable=False)
+    recommend_period = Column(Text, nullable=False)
+    declined_users = Column(Text, nullable=False)
+    done = Column(Boolean, nullable=False)
 
-find_new = Table('find_new', metadata,
-    Column('id', Integer(), primary_key=True, nullable=False),
-    Column('user_id', Integer(), ForeignKey("user.id"), nullable=False),
-    Column('important_factor', Text(), nullable=False),
-    Column('recommend_period', Integer(),  nullable=False),
-    Column('declined_users', Text(),  nullable=False),
-    Column('done', Boolean(), nullable=False),
-)
+
+Base.metadata.create_all(engine)

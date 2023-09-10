@@ -1,0 +1,35 @@
+{% for pair in pairs %}
+{% if None not in [pair.place, pair.description, pair.time] %}
+{% if len(set(json.loads(pair.whishes)).intersection(set(json.loads(pairs.get(user_pair_id).whishes)))) > 0 %}
+<div>
+    <div>
+        <div>
+            {{json.loads(pair.time)[0][0]}}
+        </div>
+        <div>
+            <span>{{json.loads(pair.time)[0][1]}}</span>
+            <span>{{json.loads(pair.time)[1][1]}}</span>
+        </div>
+    </div>
+    <div>
+        {{pair.place}}
+    </div>
+    <div>
+        {{pair.description}}
+    </div>
+    <button class="reloader" hx-post="find_pair_connect" hx-vals='{"pair_id": {{pair.id}}}' hx-swap="none">Присоединиться</button>
+</div>
+<br><br>
+{% endif %}
+{% endif %}
+{% endfor %}
+
+<button hx-post="menu_select_menu" id="exit_button" class="reloader" hx-swap="none">
+    Выход
+</button>
+
+<script>
+htmx.on("#exit_button", "htmx:afterRequest", function(evt) {
+    Telegram.WebApp.close();
+});
+</script>

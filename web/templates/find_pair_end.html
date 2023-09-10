@@ -1,0 +1,10 @@
+<h1>Готово</h1>
+<button hx-post="menu_select_menu" id="exit_button" class="reloader" hx-swap="none">
+    Выход
+</button>
+
+<script>
+htmx.on("#exit_button", "htmx:afterRequest", function(evt) {
+    Telegram.WebApp.close();
+});
+</script>
