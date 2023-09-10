@@ -2,19 +2,23 @@
 
 <div class="page-content menu way_select">
     <div class="action-button-container">
-        <button hx-post="menu_select_find_pair_specify" class="reloader action-button" hx-swap="none">
-            Новый поиск
+        <button hx-post="menu_select_events_create" class="reloader action-button" hx-swap="none">
+            Создать ивент
         </button>
         <span class="value-text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </span>
     </div>
     <div class="action-button-container">
-        <button hx-post="menu_select_find_pair_list" class="reloader action-button" hx-swap="none">
+        <button hx-post="menu_select_events_list" class="reloader action-button" hx-swap="none">
             Посмотреть существующие
         </button>
         <span class="value-text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </span>
     </div>
+</div>
+
+<div class="next-page-button-container">
+    <button class="reloader next-page-button value-text" hx-include=".interests-input" hx-post="start_interest_submit" hx-swap="none">Продолжить</button>
 </div>

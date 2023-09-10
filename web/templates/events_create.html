@@ -1,0 +1,40 @@
+<div>
+    <input type="text" name="general_topic">
+    <input type="text" name="topic">
+    <input type="number" name="people_amount">
+    <input type="datetime-local" name="time_start">
+    <input type="datetime-local" name="time_end">
+    <input type="text" name="place">
+    <button class="reloader" hx-include="closest div" hx-post="create_new_events" hx-swap="none">Продолжить</button>
+</div>
+
+<div class="page-content specify-input">
+    <h2 class="page-header">Категория ивента</h2>
+    <div class="text-field-container place">
+        <input type="text" name="general_topic" class="text-field" placeholder="Категория ивента">
+    </div>
+    <h2 class="page-header">Тема ивента</h2>
+    <div class="text-field-container place">
+        <input type="text" name="topic" class="text-field" placeholder="Тема ивента">
+    </div>
+    <input type="number" name="people_amount" class="num_picker">
+
+    <div class="time-picker-container">
+        <div class="time-picker-time-block">
+            <input type="datetime-local" name="time_start" class="time-picker-time-input">
+        </div>
+        <div class="delimiter">
+        </div>
+        <div class="time-picker-time-block">
+            <input type="datetime-local" name="time_end" class="time-picker-time-input">
+        </div>
+    </div>
+    <h2 class="page-header">Укажи место</h2>
+    <div class="text-field-container place">
+        <input type="text" name="place" class="text-field" placeholder="Место">
+    </div>
+</div>
+
+<div class="next-page-button-container">
+    <button class="reloader next-page-button value-text" hx-include=".specify-input" hx-post="find_pair_specify" hx-swap="none">Продолжить</button>
+</div>

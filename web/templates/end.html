@@ -1,0 +1,19 @@
+<div class="page-content end">
+    <div class="page-ok">
+        <img src="static/ok.svg" alt="">
+    </div>
+    <h1 class="page-header">
+        Готово
+    </h1>
+    <span class="value-text">
+        Уведомление придет тебе в ближайшее время
+    </span>
+</div>
+<div class="next-page-button-container">
+    <button hx-post="menu_select_menu" id="exit_button" class="reloader next-page-button value-text" hx-swap="none">Выход</button>
+</div>
+<script>
+htmx.on("#exit_button", "htmx:afterRequest", function(evt) {
+    Telegram.WebApp.close();
+});
+</script>

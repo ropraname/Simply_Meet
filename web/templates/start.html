@@ -1,8 +1,40 @@
-<h1>Выбери интересы</h1>
 
-<div>
+<!-- <div>
     {% for interest in dconf['main_interests'] %}
-        <input type="checkbox" name="{{interest}}" value="1">{{interest}}<Br>
-    {% endfor %}
-    <p><button class="reloader" hx-include="closest div" hx-post="start_interest_submit" hx-swap="none">Готово</button></p>
+    <input type="checkbox" name="{{interest}}" value="1">{{interest}}<Br>
+        {% endfor %}
+        <p><button class="reloader" hx-include="closest div" hx-post="start_interest_submit" hx-swap="none">Готово</button></p>
+    </div>
+     -->
+<h1 class="page-header">Выбери свои интересы</h1>
+
+<div class="page-content">
+    <div class="interests-container">
+        {% for interest in dconf['main_interests'] %}
+        <div class="interests-block">
+            <input class="interests-input" name="{{interest}}" id="{{interest}}" type="checkbox" value="1">
+            <label for="{{interest}}" class="interests-label">
+                <span class="value-text">
+                    {{interest}}
+                </span>
+            </label>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
+<div class="next-page-button-container">
+    <button class="reloader next-page-button value-text" hx-include=".interests-input" hx-post="start_interest_submit" hx-swap="none">Продолжить</button>
+</div>
+
+<script>
+    var interests_blocks = document.querySelectorAll(".interests-block .interests-label");
+    interests_blocks[1].style.cssText += '\
+    margin:25% 0 0 0; width: 100px; \
+    height: 100px;';
+    interests_blocks[2].style.cssText += '\
+    width: 100px; \
+    height: 100px;';
+    interests_blocks[3].style.cssText += '\
+    margin:25% 0 0 0;';
+</script>

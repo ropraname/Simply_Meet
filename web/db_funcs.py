@@ -43,7 +43,7 @@ def supple_pairing(search_id, time, place, description):
     user_session.description = description
     session.commit()
 
-def finish_pairing(search_id, user_id, pair_user_id):
+def finish_pairing(search_id, pair_user_id):
     pair_session = session.query(Pairs_Finding).filter(Pairs_Finding.id == search_id).one()
     pair_session.pair_user_id = pair_user_id
     pair_session.done = 1
@@ -55,7 +55,7 @@ def notify_about_pairing(search_id, pair_user_id):
     session.commit()
     return find_pair_session.user_id
     
-def decline_pairing(search_id, user_id, pair_user_id):
+def decline_pairing(search_id, pair_user_id):
     find_pair_session = session.query(Pairs_Finding).filter(Pairs_Finding.id == search_id).one()
     find_pair_session.pair_user_id = None
     declined_users = json.loads(find_pair_session.declined_users)
@@ -65,3 +65,14 @@ def decline_pairing(search_id, user_id, pair_user_id):
 
 def get_finding_pairs():
     return session.query(Pairs_Finding)
+
+def create_event(user_id, general_topic, topic, people_amount, time, place):
+    new_pair = Events(user_id=user_id, general_topic=general_topic, topic=topic, people_amount=people_amount, time=time, place=place, accepted_users="[]", done=0)
+    session.add(new_pair)
+    session.flush()
+    pair_id = new_pair.id
+    session.commit()
+    return pair_id
+
+def get_events():
+    return session.query(Events)

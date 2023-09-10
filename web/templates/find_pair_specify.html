@@ -1,11 +1,26 @@
-<h1>Выбери</h1>
+<h1 class="page-header">Выбери удобное тебе время</h1>
 
-<div>
-    <input type="datetime-local" name="event_start">
-    <input type="datetime-local" name="event_end"><br>
-    <h2>Место</h2>
-    <input type="text" name="place">
-    <h2>Доп инфа</h2>
-    <input type="text" name="description"><br>
-    <button class="reloader" hx-include="closest div" hx-post="find_pair_specify" hx-swap="none">Готово</button>
+<div class="page-content specify-input">
+    <div class="time-picker-container">
+        <div class="time-picker-time-block">
+            <input type="datetime-local" name="event_start" class="time-picker-time-input">
+        </div>
+        <div class="delimiter">
+        </div>
+        <div class="time-picker-time-block">
+            <input type="datetime-local" name="event_end" class="time-picker-time-input">
+        </div>
+    </div>
+    <h2 class="page-header">Укажи место</h2>
+    <div class="text-field-container place">
+        <input type="text" name="place" class="text-field" placeholder="Место">
+    </div>
+    <h2 class="page-header">Расскажи более детально</h2>
+    <div class="text-field-container description">
+        <input type="text" name="description" class="text-field" placeholder="Описание">
+    </div>
+</div>
+
+<div class="next-page-button-container">
+    <button class="reloader next-page-button value-text" hx-include=".specify-input" hx-post="find_pair_specify" hx-swap="none">Продолжить</button>
 </div>
